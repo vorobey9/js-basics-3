@@ -102,9 +102,9 @@ function nth(n, list) {
   // Write which takes a list and a number and returns the element at the
   // given position in the list, or undefined when there is no such element.
   // It should be recursive.
-    if(n==0 && list.value!=null)
+    if(n==0)
         return list.value;
-    if(n==1 && list.rest==null)
+    if(list.rest==null)
         return undefined;
     return nth(n-1, list.rest);
 }
@@ -117,10 +117,10 @@ function deepEqual(a, b) {
   // only if they are the same value or are objects with the same
   // properties whose values are also equal when compared with
   // a recursive call to deepEqual.
-    if(a == null || b==null) return false;
     if(a === b) return true;
-    else if(typeof a == 'object' && typeof b == 'object') {
-            var numOfA = 0, numOfB = 0;     
+    if(a == null || a==null || typeof a != 'object' || typeof b != 'object') return false;
+    else {
+        var numOfA = 0, numOfB = 0;     
         for( var i in a) {
             numOfA += 1;
             if(deepEqual(a[i], b[i]) == false) return false;
@@ -129,7 +129,7 @@ function deepEqual(a, b) {
             numOfB += 1;
         if(numOfA == numOfB) return true;
         else return false;
-    }else return false;
+    }
 }
 
 module.exports = {
